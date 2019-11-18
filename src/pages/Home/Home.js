@@ -1,35 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import HomeContext from './HomeContext';
-import Posts from '../../components/Posts';
+import React from 'react';
+import { useFetch } from '../../hooks';
+
+import MoviesList from '../../components/MoviesList';
 
 function Home() {
-  const [state, setState] = useState({
-    data: null,
-    loading: true,
-  });
+  const { data, loading } = useFetch('movie/popular');
 
-  useEffect(() => {
-    async function getData() {
-      const response = await fetch(
-        'https://jsonplaceholder.typicode.com/posts'
-      );
-      const data = await response.json();
-
-      setState({
-        data,
-        loading: false,
-      });
-    }
-    getData();
-  }, []);
-
-  return state.loading ? (
-    'Loading...'
-  ) : (
-    <HomeContext.Provider value={state.data}>
-      <Posts />
-    </HomeContext.Provider>
-  );
+  return loading ? 'Loading...' : <MoviesList data={data} />;
 }
 
 export default Home;
