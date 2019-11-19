@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useFetch } from '../../hooks';
-import TDMPoster from '../../components/TDMPoster';
+import TMDPoster from '../../components/TMDPoster';
 
 function Movie() {
   const { id } = useParams();
@@ -17,7 +17,7 @@ function Movie() {
     <>
       <h1>{title}</h1>
       <figure>
-        <TDMPoster size={1} src={poster_path} alt={title + ' poster'} />
+        <TMDPoster size={4} src={poster_path} alt={title + ' poster'} />
         <figcaption>{tagline}</figcaption>
       </figure>
     </>
