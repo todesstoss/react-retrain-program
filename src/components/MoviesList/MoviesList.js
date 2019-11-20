@@ -9,18 +9,16 @@ import styles from './MoviesList.module.scss';
 const cx = classNames.bind(styles);
 
 function MoviesList({ data }) {
-  console.log(data);
-
   return (
-    <ul className={cx('root', 'pure-g')}>
+    <ul className={cx('root', 'row', 'browser-default')}>
       {data.results.map(({ id, poster_path, title }) => (
-        <li className={cx('item', 'pure-u-1-5')} key={id}>
+        <li className={cx('item', 'col', 's2')} key={id}>
           <Link to={`movies/${id}`}>
             <TMDPoster
               size={3}
               src={poster_path}
               alt={title + ' poster'}
-              className="pure-img"
+              className="responsive-img"
             />
           </Link>
         </li>

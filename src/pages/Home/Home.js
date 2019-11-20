@@ -18,11 +18,11 @@ function Home() {
       <ul>
         {page !== '1' && (
           <li>
-            <Link to={`?page=${Number(page) - 1}`}>Prev page</Link>
+            <Link to={`/?page=${Number(page) - 1}`}>Prev page</Link>
           </li>
         )}
         <li>
-          <Link to={`?page=${Number(page) + 1}`}>Next page</Link>
+          <Link to={`/?page=${Number(page) + 1}`}>Next page</Link>
         </li>
       </ul>
     </>

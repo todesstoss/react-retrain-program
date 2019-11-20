@@ -3,6 +3,9 @@
 }
 
 .item {
-  box-sizing: border-box;
   padding: 0 5px 10px;
+}
+
+.root-item {
+  overflow: hidden;
 }
