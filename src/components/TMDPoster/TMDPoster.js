@@ -1,6 +1,6 @@
 import React from 'react';
 import TDMImage from '../TMDImage';
-import { useTMDContext } from '../../context/TDBconfigurationContext';
+import { useTMDContext } from '../../context/TMDConfigurationContext';
 
 function TMDPoster({ size, src, ...restProps }) {
   const {

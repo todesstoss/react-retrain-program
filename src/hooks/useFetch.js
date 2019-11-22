@@ -1,6 +1,5 @@
-import { useEffect, useState, useMemo } from 'react';
-import { BASE_URL } from '../constants';
-import appConfig from '../appConfig.json';
+import { useEffect, useState } from 'react';
+import { api } from '../services';
 
 function useFetch(url) {
   const [state, setState] = useState({
@@ -8,24 +7,11 @@ function useFetch(url) {
     data: null,
   });
 
-  const urlObj = useMemo(() => {
-    const urlObj = new URL(`${BASE_URL}${url}`);
-    urlObj.searchParams.set('api_key', appConfig.API_KEY);
-    return urlObj;
-  }, [url]);
-
   useEffect(() => {
-    async function getData() {
-      const response = await fetch(urlObj);
-      const data = await response.json();
-
-      setState({
-        data,
-        loading: false,
-      });
-    }
-    getData();
-  }, [urlObj]);
+    api.get(url).then((data) => {
+      setState({ data, loading: false });
+    });
+  }, [url]);
 
   return { ...state };
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTMDContext } from '../../context/TDBconfigurationContext';
+import { useTMDContext } from '../../context/TMDConfigurationContext';
 
 function TMDImage({ src, ...restProps }) {
   const {

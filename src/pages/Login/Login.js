@@ -69,6 +69,7 @@ function Login() {
               type="password"
               className="validate"
               value={state.password.value}
+              name="password"
               onChange={(e) => {
                 dispatch({
                   type: 'field',
@@ -91,6 +92,7 @@ function Login() {
               id="email"
               type="email"
               className="validate"
+              name="email"
               value={state.email.value}
               onChange={(e) => {
                 dispatch({
