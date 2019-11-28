@@ -1,28 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import queryString from 'query-string';
-import { bindActionCreators } from 'redux';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 
-import { increment, decrement, reset } from '../../actions';
-import { useFetch } from '../../hooks';
+import { fetchMovies } from '../../actions';
+// import { useFetch } from '../../hooks';
 import MoviesList from '../../components/MoviesList';
 
-function Home(props) {
+function Home({ fetchMovies, movies }) {
   const { search } = useLocation();
   const { page = '1' } = queryString.parse(search);
-  const { data, loading } = useFetch(`movie/popular?page=${page}`);
 
-  const hello = useSelector((state) => state.count);
+  // const { data, loading } = useFetch(`movie/popular?page=${page}`);
 
-  return loading ? (
+  useEffect(() => {
+    fetchMovies({ url: `movie/popular?page=${page}` });
+  }, [page, fetchMovies]);
+
+  return movies.loading ? (
     'Loading...'
   ) : (
     <>
-      <button onClick={props.increment}>increment</button>
-      {props.count} | {hello}
-      <button onClick={props.decrement}>decrement</button>
-      <MoviesList data={data} />
       <ul>
         {page !== '1' && (
           <li>
@@ -33,18 +31,17 @@ function Home(props) {
           <Link to={`/?page=${Number(page) + 1}`}>Next page</Link>
         </li>
       </ul>
+      <MoviesList data={movies} />
     </>
   );
 }
 
 const mapStateToProps = (state) => {
   return {
-    count: state.count,
+    movies: state.movies,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ increment, decrement, reset }, dispatch);
-};
+const mapDispatchToProps = { fetchMovies };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

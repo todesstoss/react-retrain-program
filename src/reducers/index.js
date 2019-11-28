@@ -1,16 +1,23 @@
 import { combineReducers } from 'redux';
 
-export function count(state = 0, action) {
-  switch (action.type) {
-    case 'INCREMENT':
-      return state + 1;
-    case 'DECREMENT':
-      return state - 1;
+export function movies(state = { loading: true }, { type, payload }) {
+  switch (type) {
+    case 'FETCH_MOVIES_START':
+      return {
+        ...state,
+        loading: true,
+      };
+    case 'FETCH_MOVIES_SUCCESS':
+      return {
+        ...state,
+        ...payload,
+        loading: false,
+      };
     default:
       return state;
   }
 }
 
-const rootReducer = combineReducers({ count });
+const rootReducer = combineReducers({ movies });
 
 export default rootReducer;
